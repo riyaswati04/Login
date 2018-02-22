@@ -1,0 +1,39 @@
+<project name="login"
+         default="build"
+         basedir=".">
+    <description>login.</description>
+    <path id="classpath.build">
+        <fileset dir="./lib" includes="**/*.jar" />
+        <pathelement path="./build/local/java" />
+    </path>
+
+  
+    <!-- Compiles all Java sources including generated ones. -->
+    <target name="compile">
+        <javac includeantruntime="false"
+               debug="true"
+               srcdir="./src"
+               destdir="./WEB-INF/classes"
+		classpathref="classpath.build"
+               fork="true">
+        </javac>
+    </target>
+
+    <!-- Build Java and files required for the Java part of the application. -->
+    <target name="build" depends="compile">
+        <!-- We've compiled the Java sources. Now we'll copy other files. -->
+        <!-- Copy web.xml and urlrewrite.xml. -->
+        <copy todir="./WEB-INF">
+            <fileset dir="./src">
+                <include name="web.xml" />
+            </fileset>
+        </copy>
+	
+
+     </target> 
+     <!-- target name="run" depends="compile">
+        <java classname="./src">
+        <classpath path="./WEB-INF/classes"/>
+        </java>
+     </target -->
+</project>

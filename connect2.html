@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SO question 4407861</title>
+       <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            $(document).ready(function() {
+            	console.log()
+                $('#searchform').submit(function() {
+                    $.getJSON("Search", $(this).serialize(), function(Search) {
+                        var table = $('#resulttable');
+                        $.each(Search, function(index, c) {
+                            $('<tr>').appendTo(table)
+                                .append($('<td>').text(c.Title))
+                                .append($('<td>').text(c.Year))
+                                .append($('<td>').text(c.imdbID))
+                                .append($('<td>').text(c.Type));
+                        });
+                    });
+                    return false;
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form id="searchform">
+            <input type="text" name="search">
+            <input type="submit">
+        </form>
+        <table id="resulttable"></table>
+    </body>
+</html>
